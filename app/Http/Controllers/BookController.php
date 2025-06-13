@@ -14,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::all();
+        $books = Book::all();
         return view('books.index', compact('books'));
     }
 
@@ -65,7 +65,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('books.edit', compact('book'));
+        return view('books.edit', compact('books'));
     }
 
     /**
@@ -77,7 +77,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-         $student->update($request->only(['bookname', 'author', 'author']));
+         $student->update($request->only(['bookname', 'author', 'publisher']));
         return redirect()->route('books.index')->with('success', 'Book updated successfully.');
     }
 
@@ -90,6 +90,6 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('students.index')->with('success', 'Book deleted successfully!');
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
     }
 }

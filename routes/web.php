@@ -21,6 +21,6 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth'])->name('home');
 
-Route::resource('book', BookController::class);
+Route::resource('books', BookController::class);
 
 require __DIR__.'/auth.php';
