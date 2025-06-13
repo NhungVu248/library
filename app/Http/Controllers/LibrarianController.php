@@ -42,7 +42,7 @@ class LibrarianController extends Controller
             'phone' => 'required',
         ]);
 
-        Student::create($request->all());
+        Librarian::create($request->all());
         return redirect()->route('librarians.index')->with('success', 'Librarian created successfully.');
     }
 
@@ -65,7 +65,7 @@ class LibrarianController extends Controller
      */
     public function edit(Librarian $librarian)
     {
-        return view('librarians.edit', compact('librian'));
+        return view('librarians.edit', compact('librarian'));
     }
 
     /**
@@ -77,7 +77,7 @@ class LibrarianController extends Controller
      */
     public function update(Request $request, Librarian $librarian)
     {
-        $student->update($request->only(['name', 'email', 'phone']));
+        $librarian->update($request->only(['name', 'email', 'phone']));
         return redirect()->route('librarians.index')->with('success', 'Librarian updated successfully.');
     }
 
@@ -89,7 +89,7 @@ class LibrarianController extends Controller
      */
     public function destroy(Librarian $librarian)
     {
-        $student->delete();
+        $librarian->delete();
         return redirect()->route('librarians.index')->with('success', 'Librarian deleted successfully!');
     }
 }

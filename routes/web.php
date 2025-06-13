@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LibrarianController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\BorrowingController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,4 +27,6 @@ Route::get('/home', function () {
 Route::resource('books', BookController::class);
 Route::resource('students', StudentController::class);
 Route::resource('librarians', LibrarianController::class);
+Route::resource('borrowings', BorrowingController::class);
+
 require __DIR__.'/auth.php';
