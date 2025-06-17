@@ -1,20 +1,17 @@
 @extends('layout')
 
 @section('content')
-
-<!-- Banner Section (Đặt ngoài container để full chiều ngang) -->
-<div class="banner">
-</div>
-
 <div class="container mt-5">
+    <!-- Banner Section -->
+    <div class="banner">
+    </div>
+
     <!-- Book List Section -->
     <div class="book-list">
         <h2 class="section-title">Danh Sách Sách</h2>
-
         @if ($message = Session::get('success'))
             <div class="alert alert-success">{{ $message }}</div>
         @endif
-
         <div class="row">
             @forelse ($books as $book)
                 <div class="col-md-3 mb-4">
@@ -24,7 +21,6 @@
                             <h5 class="card-title">{{ $book->bookname }}</h5>
                             <p class="card-text"><strong>Tác Giả:</strong> {{ $book->author }}</p>
                             <p class="card-text"><strong>Nhà Xuất Bản:</strong> {{ $book->publisher }}</p>
-                            {{-- <p class="card-text"><strong>Mô Tả:</strong> {{ Str::limit($book->description, 100) }}</p> --}}
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('books.show', $book->id) }}" class="btn btn-pastel-info">Xem Chi Tiết</a>
                                 <a href="{{ route('books.edit', $book->id) }}" class="btn btn-pastel-warning">Sửa</a>
@@ -41,25 +37,24 @@
                 <p>Không có sách nào để hiển thị.</p>
             @endforelse
         </div>
+        <a href="{{ route('books.create') }}" class="btn btn-pastel mt-3">Thêm Sách</a>
     </div>
 </div>
 @endsection
 
 <style>
     .banner {
-        background: url('{{ asset("images/banner.jpg") }}') no-repeat center center;
-        background-size: cover;
-        height: 400px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        position: relative;
-        margin-bottom: 40px;
-        border-radius: 0;
-    }
+            background: url('{{ asset("images/banner.jpg") }}') no-repeat center center;
+            background-size: contain;
+            height: 400px; /* Increased height to show full image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            position: relative;
+            margin-bottom: 40px;
+        }
 
     .book-list {
         padding: 40px 0;
@@ -91,16 +86,42 @@
         max-height: 300px;
     }
 
-    .btn-pastel-info,
-    .btn-pastel-warning,
+    .btn-pastel {
+        background-color: #A3D8F4;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-pastel:hover {
+        background-color: #89CFF0;
+    }
+
+    .btn-pastel-info {
+        background-color: #A3D8F4;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-pastel-info:hover {
+        background-color: #89CFF0;
+    }
+
+    .btn-pastel-warning {
+        background-color: #A3D8F4;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-pastel-warning:hover {
+        background-color: #89CFF0;
+    }
+
     .btn-pastel-danger {
         background-color: #A3D8F4;
         border: none;
         color: #fff;
     }
 
-    .btn-pastel-info:hover,
-    .btn-pastel-warning:hover,
     .btn-pastel-danger:hover {
         background-color: #89CFF0;
     }

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-     use HasFactory;
+    use HasFactory;
 
     protected $fillable = [
-        'bookname', 'author', 'publisher', // Add the fields you want to allow
+        'bookname', 'author', 'publisher', 'description', 'image',
     ];
 }

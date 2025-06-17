@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -36,14 +37,28 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-       $request->validate([
-            'bookname' => 'required',
-            'author' => 'required',
-            'publisher' => 'required',
+        $request->validate([
+            'bookname' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|max:2048',
         ]);
 
-        Book::create($request->all());
-        return redirect()->route('books.index')->with('success', 'Book created successfully.');
+        $book = new Book();
+        $book->bookname = $request->bookname;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $book->image = $imagePath;
+        }
+
+        $book->save();
+
+        return redirect()->route('books.index')->with('success', 'Thêm sách thành công!');
     }
 
     /**
@@ -54,7 +69,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -77,8 +92,31 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-         $book->update($request->only(['bookname', 'author', 'author']));
-        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
+        $request->validate([
+            'bookname' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'image|max:2048', // Không bắt buộc nếu không thay đổi ảnh
+        ]);
+
+        $book->bookname = $request->bookname;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            // Xóa ảnh cũ nếu tồn tại
+            if ($book->image) {
+                Storage::disk('public')->delete($book->image);
+            }
+            $imagePath = $request->file('image')->store('images', 'public');
+            $book->image = $imagePath;
+        }
+
+        $book->save();
+
+        return redirect()->route('books.index')->with('success', 'Cập nhật sách thành công!');
     }
 
     /**
@@ -89,7 +127,10 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        if ($book->image) {
+            Storage::disk('public')->delete($book->image);
+        }
         $book->delete();
-        return redirect()->route('students.index')->with('success', 'Book deleted successfully!');
+        return redirect()->route('books.index')->with('success', 'Xóa sách thành công!');
     }
 }
