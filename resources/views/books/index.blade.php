@@ -1,40 +1,107 @@
 @extends('layout')
 
 @section('content')
+
+<!-- Banner Section (Đặt ngoài container để full chiều ngang) -->
+<div class="banner">
+</div>
+
 <div class="container mt-5">
-    <h2>Book List</h2>
-    <a href="{{ route('books.create') }}" class="btn btn-primary mb-3">Add Book</a>
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">{{ $message }}</div>
-    @endif
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>BookName</th>
-                <th>Author</th>
-                <th>Publisher</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($books as $book)
-                <tr>
-                    <td>{{ $book->bookname }}</td>
-                    <td>{{ $book->author }}</td>
-                    <td>{{ $book->publisher }}</td>
-                    
-                    
-                    <td>
-                        <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <!-- Book List Section -->
+    <div class="book-list">
+        <h2 class="section-title">Danh Sách Sách</h2>
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">{{ $message }}</div>
+        @endif
+
+        <div class="row">
+            @forelse ($books as $book)
+                <div class="col-md-3 mb-4">
+                    <div class="card book-card">
+                        <img src="{{ asset('storage/' . $book->image) }}" class="card-img-top book-image" alt="{{ $book->bookname }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $book->bookname }}</h5>
+                            <p class="card-text"><strong>Tác Giả:</strong> {{ $book->author }}</p>
+                            <p class="card-text"><strong>Nhà Xuất Bản:</strong> {{ $book->publisher }}</p>
+                            {{-- <p class="card-text"><strong>Mô Tả:</strong> {{ Str::limit($book->description, 100) }}</p> --}}
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('books.show', $book->id) }}" class="btn btn-pastel-info">Xem Chi Tiết</a>
+                                <a href="{{ route('books.edit', $book->id) }}" class="btn btn-pastel-warning">Sửa</a>
+                                <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-pastel-danger" onclick="return confirm('Bạn có chắc muốn xóa sách này?')">Xóa</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p>Không có sách nào để hiển thị.</p>
+            @endforelse
+        </div>
+    </div>
 </div>
 @endsection
+
+<style>
+    .banner {
+        background: url('{{ asset("images/banner.jpg") }}') no-repeat center center;
+        background-size: cover;
+        height: 400px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        position: relative;
+        margin-bottom: 40px;
+        border-radius: 0;
+    }
+
+    .book-list {
+        padding: 40px 0;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .book-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .book-image {
+        width: 100%;
+        object-fit: cover;
+        max-height: 300px;
+    }
+
+    .btn-pastel-info,
+    .btn-pastel-warning,
+    .btn-pastel-danger {
+        background-color: #A3D8F4;
+        border: none;
+        color: #fff;
+    }
+
+    .btn-pastel-info:hover,
+    .btn-pastel-warning:hover,
+    .btn-pastel-danger:hover {
+        background-color: #89CFF0;
+    }
+</style>
