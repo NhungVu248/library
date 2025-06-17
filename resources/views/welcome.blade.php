@@ -97,6 +97,51 @@
             height: auto;
         }
 
+        .footer {
+            background-color: #f8f9fa;
+            padding: 40px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .footer .footer-section {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .footer .footer-section h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+
+        .footer .footer-section p,
+        .footer .footer-section a {
+            font-size: 14px;
+            color: #555;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer .footer-section a:hover {
+            color: #00b894;
+        }
+
+        .footer .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 14px;
+            color: #555;
+        }
+
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -120,6 +165,17 @@
 
             .navbar .auth-links {
                 margin-top: 10px;
+            }
+
+            .footer {
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .footer .footer-section {
+                margin-bottom: 20px;
+                margin-right: 0;
             }
         }
     </style>
@@ -147,5 +203,27 @@
             <img src="/images/Home.png" alt="Illustration">
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer-section">
+            <h3>About Us</h3>
+            <p>Online Library Management System provides easy access to books and resources.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <a href="#">Home</a>
+            <a href="#">Browse Books</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: support@library.com</p>
+            <p>Phone: +84 123 456 789</p>
+            <p>Address: 123 Library St, Hanoi</p>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Online Library. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
