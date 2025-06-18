@@ -4,24 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Hiển thị danh sách sinh viên với phân trang và tìm kiếm.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        $query = Student::query();
+
+        // Xử lý tìm kiếm theo tên hoặc email
+        if ($request->has('search') && !empty($request->search)) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('studentname', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $students = $query->paginate(6); // Phân trang, 6 sinh viên mỗi trang
         return view('students.index', compact('students'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Hiển thị form thêm sinh viên.
      */
     public function create()
     {
@@ -29,66 +37,84 @@ class StudentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Lưu sinh viên mới vào cơ sở dữ liệu.
      */
     public function store(Request $request)
     {
         $request->validate([
-            'studentname' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'studentname' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email',
+            'phone' => 'required|string|max:15',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ảnh tối đa 2MB
         ]);
 
-        Student::create($request->all());
-        return redirect()->route('students.index')->with('success', 'Student created successfully.');
+        $data = $request->only(['studentname', 'email', 'phone']);
+
+        // Xử lý ảnh avatar
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = basename($avatar);
+        }
+
+        Student::create($data);
+        return redirect()->route('students.index')->with('success', 'Thêm sinh viên thành công.');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Students  $students
-     * @return \Illuminate\Http\Response
+     * Hiển thị chi tiết sinh viên (chưa sử dụng).
      */
-    public function show(Students $students)
+    public function show(Student $student)
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Students  $students
-     * @return \Illuminate\Http\Response
+     * Hiển thị form sửa thông tin sinh viên.
      */
-    public function edit(Students $students)
+    public function edit(Student $student)
     {
         return view('students.edit', compact('student'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Students  $students
-     * @return \Illuminate\Http\Response
+     * Cập nhật thông tin sinh viên.
      */
-    public function update(Request $request, Students $students)
+    public function update(Request $request, Student $student)
     {
-        $student->update($request->only(['studentname', 'email', 'phone']));
-        return redirect()->route('students.index')->with('success', 'Student updated successfully.');
+        $request->validate([
+            'studentname' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'phone' => 'required|string|max:15',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $data = $request->only(['studentname', 'email', 'phone']);
+
+        // Xử lý ảnh avatar
+        if ($request->hasFile('avatar')) {
+            // Xóa ảnh cũ nếu có
+            if ($student->avatar) {
+                Storage::disk('public')->delete('avatars/' . $student->avatar);
+            }
+            $avatar = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = basename($avatar);
+        }
+
+        $student->update($data);
+        return redirect()->route('students.index')->with('success', 'Cập nhật sinh viên thành công.');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Students  $students
-     * @return \Illuminate\Http\Response
+     * Xóa sinh viên.
      */
-    public function destroy(Students $students)
+    public function destroy(Student $student)
     {
-        //
+        // Xóa ảnh avatar nếu có
+        if ($student->avatar) {
+            Storage::disk('public')->delete('avatars/' . $student->avatar);
+        }
+
+        $student->delete();
+        return redirect()->route('students.index')->with('success', 'Xóa sinh viên thành công.');
     }
 }

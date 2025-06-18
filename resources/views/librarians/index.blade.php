@@ -1,12 +1,19 @@
 @extends('layout')
 
 @section('content')
+<!-- Full-width Banner Section -->
+<div class="w-100">
+    <img src="{{ asset('images/banner.jpg') }}" alt="Library Banner" style="width: 100%; height: auto;">
+</div>
+
 <div class="container mt-5">
     <h2>Librarian List</h2>
     <a href="{{ route('librarians.create') }}" class="btn btn-primary mb-3">Add Librarian</a>
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success">{{ $message }}</div>
     @endif
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -22,8 +29,6 @@
                     <td>{{ $librarian->name }}</td>
                     <td>{{ $librarian->email }}</td>
                     <td>{{ $librarian->phone }}</td>
-                    
-                    
                     <td>
                         <a href="{{ route('librarians.edit', $librarian->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('librarians.destroy', $librarian->id) }}" method="POST" style="display:inline;">

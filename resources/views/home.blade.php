@@ -18,7 +18,7 @@
             color: white;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
             position: relative;
-            margin-bottom: 40px;
+            margin: 40px;
         }
         
         .navbar {

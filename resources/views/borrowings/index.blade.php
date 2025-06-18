@@ -1,12 +1,19 @@
 @extends('layout')
 
 @section('content')
+<!-- Banner Section -->
+<div class="w-100 mb-4">
+    <img src="{{ asset('images/banner.jpg') }}" alt="Library Banner" class="img-fluid w-100" style="max-height: 300px; object-fit: cover;">
+</div>
+
 <div class="container mt-5">
     <h2>Borrowing List</h2>
     <a href="{{ route('borrowings.create') }}" class="btn btn-primary mb-3">Add Borrowing</a>
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success">{{ $message }}</div>
     @endif
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -24,8 +31,6 @@
                     <td>{{ $borrowing->bookname }}</td>
                     <td>{{ $borrowing->dateborrowed }}</td>
                     <td>{{ $borrowing->datereturn }}</td>
-                    
-                    
                     <td>
                         <a href="{{ route('borrowings.edit', $borrowing->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('borrowings.destroy', $borrowing->id) }}" method="POST" style="display:inline;">
