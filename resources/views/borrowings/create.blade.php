@@ -2,26 +2,89 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2>Add Borrowing</h2>
-    <form action="{{ route('borrowings.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="name">StudentName</label>
-            <input type="text" name="studentname" class="form-control" required>
+    <h2>Thêm Mượn Trả Sách</h2>
+
+    <!-- Thông báo lỗi -->
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="form-group">
-            <label for="bookname">BookName</label>
-            <input type="text" name="bookname" class="form-control" required>
+    @endif
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thêm Mượn Trả</h4>
         </div>
-        <div class="form-group">
-            <label for="dateborrowed">DateBorrowed</label>
-            <input type="date" name="dateborrowed" class="form-control" required>
+        <div class="card-body">
+            <form action="{{ route('borrowings.store') }}" method="POST">
+                @csrf
+                <!-- Sinh viên -->
+                <div class="form-group mb-3">
+                    <label for="student_id" class="form-label">Sinh Viên</label>
+                    <select name="student_id" id="student_id" class="form-control" required>
+                        <option value="">Chọn sinh viên</option>
+                        @foreach ($students as $student)
+                            <option value="{{ $student->id }}" {{ old('student_id') == $student->id ? 'selected' : '' }}>{{ $student->studentname }}</option>
+                        @endforeach
+                    </select>
+                    @error('student_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Thủ thư xử lý -->
+                <div class="form-group mb-3">
+                    <label for="librarian_id" class="form-label">Thủ Thư Xử Lý</label>
+                    <select name="librarian_id" id="librarian_id" class="form-control">
+                        <option value="">Chọn thủ thư (tùy chọn)</option>
+                        @foreach ($librarians as $librarian)
+                            <option value="{{ $librarian->id }}" {{ old('librarian_id') == $librarian->id ? 'selected' : '' }}>{{ $librarian->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('librarian_id')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Tên sách -->
+                <div class="form-group mb-3">
+                    <label for="bookname" class="form-label">Tên Sách</label>
+                    <input type="text" name="bookname" id="bookname" class="form-control" value="{{ old('bookname') }}" required>
+                    @error('bookname')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Ngày mượn -->
+                <div class="form-group mb-3">
+                    <label for="dateborrowed" class="form-label">Ngày Mượn</label>
+                    <input type="date" name="dateborrowed" id="dateborrowed" class="form-control" value="{{ old('dateborrowed', now()->format('Y-m-d')) }}" required>
+                    @error('dateborrowed')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Ngày trả -->
+                <div class="form-group mb-3">
+                    <label for="datereturn" class="form-label">Ngày Trả (nếu đã trả)</label>
+                    <input type="date" name="datereturn" id="datereturn" class="form-control" value="{{ old('datereturn') }}">
+                    <small class="text-muted">Để trống nếu sách đang được mượn.</small>
+                    @error('datereturn')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <a href="{{ route('borrowings.index') }}" class="btn btn-secondary">Quay Lại</a>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="datereturn">DateReturn</label>
-            <input type="date" name="datereturn" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-success mt-3">Save</button>
-    </form>
+    </div>
 </div>
 @endsection

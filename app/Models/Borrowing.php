@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Borrowing extends Model
 {
-     use HasFactory;
+    protected $fillable = ['student_id', 'librarian_id', 'studentname', 'bookname', 'dateborrowed', 'datereturn'];
 
-    protected $fillable = [
-        'studentname', 'bookname', 'dateborrowed','datereturn', // Add the fields you want to allow
-    ];
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function librarian()
+    {
+        return $this->belongsTo(Librarian::class, 'librarian_id');
+    }
 }
