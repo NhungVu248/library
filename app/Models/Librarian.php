@@ -10,6 +10,6 @@ class Librarian extends Model
      use HasFactory;
 
     protected $fillable = [
-        'name', 'email', 'phone', // Add the fields you want to allow
+        'name', 'email', 'phone','avatar', // Add the fields you want to allow
     ];
 }

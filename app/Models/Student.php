@@ -10,6 +10,6 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'studentname', 'email', 'phone', // Add the fields you want to allow
+        'studentname', 'email', 'phone','avatar', // Add the fields you want to allow
     ];
 }

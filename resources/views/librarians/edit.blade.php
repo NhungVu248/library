@@ -1,52 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Librarian</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Edit Librarian</h4>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('librarians.update', $librarian->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+@extends('layout')
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" id="name" name="name" value="{{ $librarian->name }}" class="form-control" placeholder="Enter Name" required>
-                    </div>
+@section('content')
+<div class="container mt-5">
+    <h2>Sửa Thông Tin Thủ Thư</h2>
 
-                    
+    <!-- Thông báo lỗi -->
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" id="email" name="email" value="{{ $librarian->email }}" class="form-control" placeholder="Enter Email" required>
-                    </div>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Sửa Thủ Thư</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('librarians.update', $librarian->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone:</label>
-                        <input type="text" id="phone" name="phone" value="{{ $librarian->phone }}" class="form-control" placeholder="Enter Phone" required>
-                    </div>
+                <!-- Ảnh Avatar -->
+                <div class="form-group mb-3">
+                    <label for="avatar" class="form-label">Ảnh Avatar</label>
+                    <input type="file" name="avatar" id="avatar" accept="image/*" class="form-control">
+                    @if($librarian->avatar)
+                        <img src="{{ asset('storage/avatars/' . $librarian->avatar) }}" alt="Avatar của {{ $librarian->name }}" class="rounded-circle mt-2" style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #007bff;">
+                    @else
+                        <img src="{{ asset('images/default-avatar.png') }}" alt="Avatar mặc định" class="rounded-circle mt-2" style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #007bff;">
+                    @endif
+                    @error('avatar')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
 
-                    
+                <!-- Tên -->
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label">Tên</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $librarian->name) }}" required>
+                    @error('name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
 
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-success">Update Librarian</button>
-                        <a href="{{ route('librarians.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
-            </div>
+                <!-- Email -->
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $librarian->email) }}" required>
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <!-- Số Điện Thoại -->
+                <div class="form-group mb-3">
+                    <label for="phone" class="form-label">Số Điện Thoại</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone', $librarian->phone) }}" required>
+                    @error('phone')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">Cập Nhật</button>
+                    <a href="{{ route('librarians.index') }}" class="btn btn-secondary">Quay Lại</a>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+@endsection
