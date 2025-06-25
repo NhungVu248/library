@@ -71,12 +71,9 @@ Các mô-đun chính:
 
 ---
 
-## 💻 Mã nguồn nổi bật
-
-<details>
-<summary>ProfileController</summary>
-
-```php
+💻 Mã nguồn nổi bật
+<details> <summary>ProfileController</summary>
+PHP
 // Quản lý hồ sơ người dùng
 namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -108,10 +105,8 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 }
-</details>
-
-</details>
-<summary>StudentController</summary>
+</details> <details> <summary>StudentController</summary>
+PHP
 // Quản lý thông tin sinh viên
 namespace App\Http\Controllers;
 use App\Models\Student;
@@ -142,8 +137,8 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Sinh viên được tạo thành công.');
     }
 }
-</details>
-<summary>BorrowingController</summary>
+</details> <details> <summary>BorrowingController</summary>
+PHP
 // Quản lý hồ sơ mượn/trả
 namespace App\Http\Controllers;
 use App\Models\Borrowing;
@@ -176,7 +171,8 @@ class BorrowingController extends Controller
     }
 }
 </details>
-
+📦 Hướng dẫn cài đặt
+bash
 # 1. Tải mã nguồn
 git clone https://github.com/NhungVu248/library.git
 cd library
@@ -213,3 +209,4 @@ Mọi đóng góp đều được hoan nghênh! Vui lòng fork, gửi pull reque
 🙌 Lời cảm ơn
 Cảm ơn Đại học Phenikaa vì cơ hội thực hiện dự án.
 Cảm ơn cộng đồng Laravel vì tài liệu và các gói hỗ trợ tuyệt vời.
+
