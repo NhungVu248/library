@@ -1,4 +1,5 @@
 Ứng dụng Quản lý Thư viện
+
 Tổng quan về dự án
 Dự án này là một Hệ thống Quản lý Thư viện dựa trên web, được phát triển để hỗ trợ quản lý sách, sinh viên, thủ thư và quy trình mượn/trả sách một cách hiệu quả. Hệ thống cho phép người dùng thực hiện các thao tác như thêm, chỉnh sửa, xóa sách, quản lý thông tin sinh viên và thủ thư, cũng như theo dõi hồ sơ mượn sách. Người dùng cần đăng nhập để sử dụng các chức năng.
 
@@ -8,7 +9,7 @@ Lớp: K17_CNTT_3
 Môn học: Thiết kế web nâng cao  
 Trường: Đại học Phenikaa, Khoa Công nghệ Thông tin  
 Kho GitHub: https://github.com/NhungVu248/library.git  
-Trang web công khai: library-production-07c2.up.railway.app
+Public link: library-production-07c2.up.railway.app
 
 Mô tả dự án
 Hệ thống Quản lý Thư viện được thiết kế để:
@@ -59,7 +60,8 @@ Students: Lưu trữ thông tin sinh viên (tên, email, ảnh đại diện).
 Librarians: Lưu trữ thông tin thủ thư (tên, email, số điện thoại, ảnh đại diện).  
 Borrowings: Theo dõi hồ sơ mượn sách (ID sinh viên, ID thủ thư, tên sách, ngày mượn, ngày trả).  
 Users: Quản lý thông tin tài khoản người dùng (email, tên, mật khẩu).
-wnc.png
+![image](https://github.com/user-attachments/assets/a810a7ac-3297-4b2d-916e-3c4969c767a9)
+
 Hình 1: Sơ đồ cơ sở dữ liệu của hệ thống.
 2. Sơ đồ chức năng
 Hệ thống bao gồm các mô-đun sau:
@@ -99,7 +101,8 @@ Xóa tài khoản sau khi xác thực mật khẩu.
 Quản lý phiên đăng nhập.
 
 
-Editor _ Mermaid Chart-2025-06-18-173631.png
+![image](https://github.com/user-attachments/assets/558b9f78-674f-45fb-9661-aa0251d6d3b9)
+
 Hình 2: Sơ đồ chức năng của hệ thống.
 3. Sơ đồ thuật toán
 
