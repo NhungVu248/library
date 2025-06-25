@@ -1,61 +1,211 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎉 Ứng dụng Quản lý Thư viện
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 🌟 Tổng quan về dự án
+Dự án này là một **Hệ thống Quản lý Thư viện** dựa trên web, phát triển nhằm hỗ trợ quản lý sách, sinh viên, thủ thư và quy trình mượn/trả sách một cách dễ dàng, hiệu quả.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**👩‍💻 Tác giả:** Vũ Hồng Nhung  
+**🎓 Mã sinh viên:** 23010221  
+**🏫 Lớp:** K17_CNTT_3  
+**📚 Môn học:** Thiết kế web nâng cao  
+**🏢 Trường:** Đại học Phenikaa, Khoa Công nghệ Thông tin  
+**🌐 Kho GitHub:** [library](https://github.com/NhungVu248/library.git)  
+**🚀 Website demo:** [library-production-07c2.up.railway.app](https://library-production-07c2.up.railway.app)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📝 Mô tả dự án
 
-## Learning Laravel
+- 📖 **Quản lý sách:** Thêm, chỉnh sửa, xóa, hiển thị danh sách sách.
+- 👥 **Quản lý sinh viên:** Thêm, chỉnh sửa, xóa, tải ảnh đại diện.
+- 🧑‍🏫 **Quản lý thủ thư:** Thêm, chỉnh sửa, xóa, tải ảnh đại diện, ghi log lỗi.
+- 🔄 **Quản lý mượn/trả:** Tìm kiếm, lọc, thao tác CRUD hồ sơ mượn/trả.
+- 🛡️ **Quản lý hồ sơ người dùng:** Cập nhật thông tin, xóa tài khoản, quản lý phiên đăng nhập.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🛠️ Công nghệ sử dụng
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Công nghệ           | Mô tả                                        |
+|---------------------|----------------------------------------------|
+| **Laravel 11+**     | Framework PHP mạnh mẽ theo kiến trúc MVC     |
+| **Laravel Breeze**  | Gói xác thực nhẹ, tích hợp Blade/Inertia.js  |
+| **Blade**           | Template engine tích hợp trong Laravel       |
+| **MySQL (Railway)** | Cơ sở dữ liệu quan hệ                        |
+| **GitHub Codespaces** | Môi trường phát triển/triển khai đám mây  |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🏗️ Kiến trúc hệ thống
 
-### Premium Partners
+### 1. 📊 Sơ đồ cơ sở dữ liệu
+Cơ sở dữ liệu gồm các thực thể:  
+- **Books:** Thông tin sách (tên, tác giả, nhà xuất bản, mô tả, ảnh bìa)
+- **Students:** Thông tin sinh viên (tên, email, ảnh đại diện)
+- **Librarians:** Thông tin thủ thư (tên, email, SĐT, ảnh đại diện)
+- **Borrowings:** Hồ sơ mượn sách (ID sinh viên, ID thủ thư, tên sách, ngày mượn/trả)
+- **Users:** Tài khoản (email, tên, mật khẩu)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+![image](https://github.com/user-attachments/assets/43509231-1718-4a11-bb54-d40f4fac3078)  
+*Hình 1: Sơ đồ cơ sở dữ liệu*
 
-## Contributing
+### 2. 📈 Sơ đồ chức năng
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Các mô-đun chính:
+- 📚 **Quản lý sách:** Hiển thị, thêm, chỉnh sửa, xóa, quản lý ảnh bìa, xác thực dữ liệu
+- 👨‍🎓 **Quản lý sinh viên:** Hiển thị, thêm, chỉnh sửa, xóa, quản lý ảnh đại diện, tìm kiếm
+- 🧑‍🏫 **Quản lý thủ thư:** Hiển thị, thêm, chỉnh sửa, xóa, quản lý ảnh đại diện, ghi log lỗi
+- 🔄 **Quản lý mượn/trả:** Quản lý hồ sơ mượn/trả, tìm kiếm, lọc
+- 🛡️ **Quản lý hồ sơ:** Cập nhật thông tin, xóa tài khoản, quản lý phiên
 
-## Code of Conduct
+![image](https://github.com/user-attachments/assets/11b846cb-c8cd-4796-8717-1d05df2a8c4b)  
+*Hình 2: Sơ đồ chức năng*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. 🔧 Sơ đồ thuật toán
+- **Quản lý người dùng:** Edit, Update, Delete
+- **Quản lý sách:** Index, Create, Store, Show, Edit, Update, Delete
+- **Quản lý sinh viên:** Index, Create, Store, Edit, Update, Delete
+- **Quản lý thủ thư:** Như sinh viên, thêm log lỗi
+- **Quản lý mượn/trả:** Index, Create, Store, Show, Edit, Update, Delete
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+💻 Mã nguồn nổi bật
+<details> <summary>ProfileController</summary>
+PHP
+// Quản lý hồ sơ người dùng
+namespace App\Http\Controllers;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
-## License
+class ProfileController extends Controller
+{
+    public function edit(Request $request) {
+        return view('profile.edit', ['user' => $request->user()]);
+    }
+    public function update(ProfileUpdateRequest $request): RedirectResponse {
+        $request->user()->fill($request->validated());
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+        $request->user()->save();
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+    public function destroy(Request $request): RedirectResponse {
+        $request->validateWithBag('userDeletion', ['password' => ['required', 'current_password']]);
+        $user = $request->user();
+        Auth::logout();
+        $user->delete();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return Redirect::to('/');
+    }
+}
+</details> <details> <summary>StudentController</summary>
+PHP
+// Quản lý thông tin sinh viên
+namespace App\Http\Controllers;
+use App\Models\Student;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+class StudentController extends Controller
+{
+    public function index(Request $request) {
+        $query = Student::query();
+        if ($request->has('search')) {
+            $query->where('studentname', 'LIKE', '%' . $request->search . '%')
+                  ->orWhere('email', 'LIKE', '%' . $request->search . '%');
+        }
+        $students = $query->paginate(6);
+        return view('students.index', compact('students'));
+    }
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'studentname' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        if ($request->hasFile('avatar')) {
+            $validated['photo'] = $request->file('avatar')->store('avatars', 'public');
+        }
+        Student::create($validated);
+        return redirect()->route('students.index')->with('success', 'Sinh viên được tạo thành công.');
+    }
+}
+</details> <details> <summary>BorrowingController</summary>
+PHP
+// Quản lý hồ sơ mượn/trả
+namespace App\Http\Controllers;
+use App\Models\Borrowing;
+use App\Models\Student;
+use App\Models\Librarian;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+class BorrowingController extends Controller
+{
+    public function index(Request $request) {
+        $query = Borrowing::with(['student', 'librarian']);
+        if ($request->has('search')) {
+            $query->whereHas('student', fn($q) => $q->where('studentname', 'LIKE', '%' . $request->search . '%'))
+                  ->orWhere('bookname', 'LIKE', '%' . $request->search . '%');
+        }
+        $borrowings = $query->paginate(6);
+        return view('borrowings.index', compact('borrowings'));
+    }
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'bookname' => 'required|string|max:255',
+            'dateborrowed' => 'required|date',
+        ]);
+        $student = Student::find($request->student_id);
+        $validated['studentname'] = $student->studentname;
+        Borrowing::create($validated);
+        return redirect()->route('borrowings.index')->with('success', 'Hồ sơ mượn được tạo thành công.');
+    }
+}
+</details>
+📦 Hướng dẫn cài đặt
+bash
+# 1. Tải mã nguồn
+git clone https://github.com/NhungVu248/library.git
+cd library
+
+# 2. Cài đặt phụ thuộc
+composer install
+npm install
+
+# 3. Thiết lập môi trường
+cp .env.example .env
+
+# 4. Cấu hình .env (MySQL)
+php artisan key:generate
+
+# 5. Chạy migration
+php artisan migrate
+
+# 6. Khởi động server
+php artisan serve
+
+# 7. Truy cập tại
+http://localhost:8000
+
+# 8. Biên dịch tài nguyên
+npm run dev
+🎮 Hướng dẫn sử dụng
+🔐 Đăng nhập: Yêu cầu xác thực để truy cập.
+📊 Bảng điều khiển: Quản lý sách, sinh viên, thủ thư, hồ sơ mượn/trả.
+🛠️ Quản lý hồ sơ: Cập nhật hoặc xóa tài khoản.
+🔍 Tìm kiếm & lọc: Tìm bản ghi nhanh chóng.
+🤝 Đóng góp
+Mọi đóng góp đều được hoan nghênh! Vui lòng fork, gửi pull request và đảm bảo code tuân thủ chuẩn, có kiểm thử.
+
+🙌 Lời cảm ơn
+Cảm ơn Đại học Phenikaa vì cơ hội thực hiện dự án.
+Cảm ơn cộng đồng Laravel vì tài liệu và các gói hỗ trợ tuyệt vời.
