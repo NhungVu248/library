@@ -71,9 +71,12 @@ Các mô-đun chính:
 
 ---
 
-💻 Mã nguồn nổi bật
-<details> <summary>ProfileController</summary>
-PHP
+## 💻 Mã nguồn nổi bật
+
+<details>
+<summary>ProfileController</summary>
+
+```php
 // Quản lý hồ sơ người dùng
 namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -204,9 +207,3 @@ npm run dev
 🛠️ Quản lý hồ sơ: Cập nhật hoặc xóa tài khoản.
 🔍 Tìm kiếm & lọc: Tìm bản ghi nhanh chóng.
 🤝 Đóng góp
-Mọi đóng góp đều được hoan nghênh! Vui lòng fork, gửi pull request và đảm bảo code tuân thủ chuẩn, có kiểm thử.
-
-🙌 Lời cảm ơn
-Cảm ơn Đại học Phenikaa vì cơ hội thực hiện dự án.
-Cảm ơn cộng đồng Laravel vì tài liệu và các gói hỗ trợ tuyệt vời.
-
