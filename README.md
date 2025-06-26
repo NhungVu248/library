@@ -64,10 +64,42 @@ Các mô-đun chính:
 
 ### 3. 🔧 Sơ đồ thuật toán
 - **Quản lý người dùng:** Edit, Update, Delete
+  ![image](https://github.com/user-attachments/assets/d7c2fc98-1fa5-43eb-9604-09ba363e5e93)
+![image](https://github.com/user-attachments/assets/3aaee7f3-1fe7-4de6-867e-73c12c91258e)
+![image](https://github.com/user-attachments/assets/270b65f8-6f64-4487-972d-ef90dda8470d)
+![image](https://github.com/user-attachments/assets/a3683c76-7ffb-4773-805c-4d3952ac02cf)
+
 - **Quản lý sách:** Index, Create, Store, Show, Edit, Update, Delete
+  ![image](https://github.com/user-attachments/assets/563e588e-69a7-4860-a8e3-295441fe54f5)
+![image](https://github.com/user-attachments/assets/4274b4f6-c23a-4835-a485-a96f407c9a82)
+![image](https://github.com/user-attachments/assets/673a96ba-1011-4d40-b412-a631b782d430)
+![image](https://github.com/user-attachments/assets/3ca416b4-9751-434b-8951-e84eaa1275c7)
+![image](https://github.com/user-attachments/assets/21289c89-96eb-4d62-85cd-ba9db708ddbb)
+![image](https://github.com/user-attachments/assets/8d38233f-48be-4517-99ad-2036d0615ae7)
+
 - **Quản lý sinh viên:** Index, Create, Store, Edit, Update, Delete
+- ![image](https://github.com/user-attachments/assets/917b0640-2c21-413a-9129-fa0fa5922312)
+![image](https://github.com/user-attachments/assets/b36a6e75-2280-481c-8635-55d94d01be4a)
+![image](https://github.com/user-attachments/assets/3c79915c-7391-43e8-96d5-a58067ef0eec)
+![image](https://github.com/user-attachments/assets/58e340b6-af8f-4352-818f-9cc3f2b5736e)
+![image](https://github.com/user-attachments/assets/c1ab8fbb-74f2-4457-9058-914137166317)
+
 - **Quản lý thủ thư:** Như sinh viên, thêm log lỗi
+- ![image](https://github.com/user-attachments/assets/b31f92de-3ee4-421b-90fe-60c13d42f996)
+- ![image](https://github.com/user-attachments/assets/9f48446d-d5ad-41f3-a7d9-75945698d4dd)
+![image](https://github.com/user-attachments/assets/7e42b5b1-0667-4b99-85dc-c4cb5e90dd87)
+![image](https://github.com/user-attachments/assets/d47e7420-163a-47a1-9382-eedde8dee20f)
+
+![image](https://github.com/user-attachments/assets/8b0a7b5c-2a53-40bb-bfc5-a434b4f00a05)
+
 - **Quản lý mượn/trả:** Index, Create, Store, Show, Edit, Update, Delete
+![image](https://github.com/user-attachments/assets/21561ee0-8d72-476e-a061-bb423dd287c7)
+![image](https://github.com/user-attachments/assets/bdcf6969-bfc4-46a6-97f5-62d12d52f224)
+![image](https://github.com/user-attachments/assets/cb098023-5efa-47db-b6ae-251577cca5f7)
+![image](https://github.com/user-attachments/assets/780cdb77-cdb7-45d8-ad2f-61a46c62470a)
+![image](https://github.com/user-attachments/assets/e9cd5a42-9593-4a21-a964-ea7f6a3b79e9)
+![image](https://github.com/user-attachments/assets/908d6dd4-d854-40d3-a3e5-980aecd2d0c0)
+![image](https://github.com/user-attachments/assets/67456d1c-2e4a-4c03-a9a0-831eadd471a8)
 
 ---
 
