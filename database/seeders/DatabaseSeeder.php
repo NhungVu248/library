@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\Librarian;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,11 +13,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+       $librarians = [
+            [
+                'name' => 'Nguyễn Văn An',
+                'email' => 'an.nguyen@example.com',
+                'phone' => '0912345678',
+                'avatar' => 'https://example.com/avatars/an_nguyen.jpg'
+            ],
+        ];
+        foreach ($librarians as $librarian) {
+            Librarian::create([
+                'name' => $librarian['name'],
+                'email' => $librarian['email'],
+                'phone' => $librarian['phone'],
+                'avatar' => $librarian['avatar']
+            ]);
+        }
     }
 }
